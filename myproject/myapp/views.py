@@ -7,10 +7,13 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib import messages
+
+from .forms import NewUserForm
 #ตั้งชื่อfunctionได้ตามสะดวก
 def RegisterUserView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
+        #form = NewUserForm(request.POST)
         if form.is_valid():
             user = form.save()
             #เมื่อสมัครเสร็จแล้วจะให้เด้งไปหน้าไหน
@@ -27,6 +30,7 @@ def RegisterUserView(request):
 
     #เนื่อจากข้างบนเป็น if-elseเลยต้องมีเผื่อไว้
     form = UserCreationForm
+    #form = NewUserForm
     return render(request = request,
                   template_name = "register.html",
                   context={"form":form})
